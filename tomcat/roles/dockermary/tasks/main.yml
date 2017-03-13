@@ -1,0 +1,30 @@
+---
+- name: Installing Docker to {{ remotehost }} at IP {{ remoteip }}
+  yum:
+    name: docker
+    state: present
+
+- name: Starting Docker Service
+  service:
+    name: docker
+    state: started
+
+- name: Remove Existing Tomcat Container
+  shell: docker rm -f tomcat
+  ignore_errors: yes
+
+- name: Install Tomcat to {{ remotehost }} at IP {{ remoteip }}
+  shell: docker run -d -p 80:8080 --name tomcat tomcat
+
+- name: Copy tomcat-users.xml file to {{ copylocation }}
+  template:
+    src: tomcat-users.xml
+    dest: "{{ copylocation }}"
+
+- name: Copy XML to container at {{ tomcatdest }}
+  shell: docker cp "{{ copylocation }}"/tomcat-users.xml  "{{ tomcatdest }}"/conf
+
+- name: Restart Tomcat Container
+  shell: docker restart tomcat
+
+

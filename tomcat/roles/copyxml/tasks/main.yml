@@ -1,0 +1,5 @@
+---
+- name: Copy tomcat-users.xml to "{{ remotehost }}"  IP {{ remoteip }}
+  template:
+    src: tomcat-users.xml
+    dest: "{{ copylocation }}"

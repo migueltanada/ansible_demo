@@ -1,0 +1,12 @@
+- hosts: klifford
+  become: true
+  become_user: root
+  tasks:
+    - name: run tomcat container
+      shell: docker run -d -p 80:8080 tomcat
+
+    - name: copy tomcat-users.xml
+      copy:
+        src: tomcat-users.xml
+        dest: /home/ec2-user/
+   

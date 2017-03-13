@@ -1,0 +1,3 @@
+---
+- name: Copy to tomcat container
+  shell: docker cp "{{ copylocation }}"/tomcat-users.xml tomcat:/usr/local/tomcat/conf/

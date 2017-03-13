@@ -1,0 +1,35 @@
+- hosts: kliffy
+  become: true
+  become_user: root
+  tasks:
+    - name: install httpd
+      yum: 
+        name: httpd
+        state: present
+
+    - name: stop tomcat if running
+      shell: docker stop tomcat
+
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
+
+    - name: install git first
+      yum:
+        name: git
+        state: present
+
+    - name: git clone the given URL
+      git:
+        repo: https://github.com/migueltanada/html.git
+        dest: /var/www/html
+        clone: yes
+        force: yes
+
+    - name: rename index.html to another file
+      shell: mv /var/www/html/index.html /var/www/html/index.html2
+
+    - name: rename asd.html
+      shell: mv /var/www/html/asd.html /var/www/html/index.html
+

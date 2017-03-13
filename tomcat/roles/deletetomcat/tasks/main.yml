@@ -1,0 +1,4 @@
+---
+- name: Remove Dcoker Container
+  shell: docker rm -f tomcat
+  ignore_errors: yes

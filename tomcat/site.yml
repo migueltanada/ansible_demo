@@ -1,0 +1,7 @@
+- hosts: KLIFFY
+  become: true
+  become_user: root
+
+  roles:
+   - dockermary
+   - deployjenkins

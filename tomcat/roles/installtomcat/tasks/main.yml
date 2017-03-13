@@ -1,0 +1,3 @@
+---
+- name: Install tomcat
+  shell: docker run -d -p 80:8080 --name tomcat tomcat

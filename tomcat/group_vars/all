@@ -1,0 +1,5 @@
+remotehost: KLIFFY
+remoteip: 172.31.56.177
+copylocation: /tmp/
+tomcatdest: tomcat:/usr/local/tomcat/
+jenkinsurl: http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/war/2.49/jenkins.war

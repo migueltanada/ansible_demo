@@ -1,0 +1,10 @@
+---
+- name: Download jenkins using  get_url
+  get_url:
+    url: "{{ jenkinsurl }}"
+    dest: "{{ copylocation  }}"
+
+- name: Copy Jenkins Inside Container
+  shell: docker cp "{{ copylocation }}"/jenkins.war "{{ tomcatdest }}"/webapps
+
+

@@ -1,0 +1,28 @@
+- hosts: kliffy
+  become: true
+  become_user: root
+  tasks:
+    - name: check tomcat container
+      shell: docker rm -f tomcat
+   
+    - name: run tomcat container
+      shell: docker run -d --name tomcat -p 80:8080 tomcat
+
+    - name: copy tomcat-users.xml
+      copy:
+        src: tomcat-users.xml
+        dest: /home/ec2-user/
+
+    - name: copy tomcat-users.xml inside container
+      shell: docker cp /home/ec2-user/tomcat-users.xml tomcat:/usr/local/tomcat/conf
+
+    - name: restart tomcat
+      shell: docker restart tomcat
+
+    - name: Download jenkins using  get_url
+      get_url:
+        url: http://ftp.yz.yamagata-u.ac.jp/pub/misc/jenkins/war/2.49/jenkins.war
+        dest: /home/ec2-user
+
+    - name: copy jenkins.war to webapps
+      shell: docker cp /home/ec2-user/jenkins.war tomcat:/usr/local/tomcat/webapps
