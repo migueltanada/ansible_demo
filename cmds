@@ -1,0 +1,6 @@
+ ansible KLIFFY -i hosts -m shell -a "touch /home/ec2-user/jaysonisgaytestfile"
+ ansible KLIFFY -i hosts -m copy -a "src=maryisgay.yml dest=/home/ec2-user/"
+ ansible KLIFFY -i hosts -m service -a "name=httpd state=started"
+ ansible KLIFFY -i hosts -m service -a "name=httpd state=started" --become --becom-user root
+ ansible KLIFFY -i hosts -m service -a "name=httpd state=started" --become --become-user root
+

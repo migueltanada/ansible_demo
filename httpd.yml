@@ -7,9 +7,6 @@
         name: httpd
         state: present
 
-    - name: stop tomcat if running
-      shell: docker stop tomcat
-
     - name: start httpd
       service:
         name: httpd
